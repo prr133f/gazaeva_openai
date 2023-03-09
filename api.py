@@ -1,6 +1,5 @@
 import pip._vendor.requests as requests
 import json
-import os
 
 class GPT:
     __url = "https://api.openai.com/v1/chat/completions"
@@ -20,30 +19,3 @@ class GPT:
         resp = requests.post(self.__url, data=__data, headers={"Content-Type": "application/json", "Authorization": self.__auth})
 
         return resp.json()
-    
-
-g = GPT(os.getenv('TOKEN'))
-
-src = """
-#include <iostream>
-#include <string>
-using namespace std;
-int main()
-{
-    string s,s1=""; cin>>s;
-    int rez = 0;
-    for(int i=0; i<s.size(); i++){
-        if(s[i] == '+'){
-            rez += stoi(s1);
-            s1 = "";
-        }
-        else
-            s1 += s[i];
-    }
-    rez += stoi(s1);
-    cout<<rez;
-return 0;
-}
-"""
-
-print(g.translate(src, "c++", "python")['choices'][0]['message']['content'])
