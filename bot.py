@@ -18,6 +18,7 @@ async def translate(msg):
     text = ''.join(msg.text.split('\n')[1:])
     if text == '':
         await bot.send_message(msg.chat.id, "Вы забыли сказать мне что переводить)")
+        return
     try:
         lang1, lang2 = text.split(':')[0], text.split(':')[1].split('\n')[0]
         src = ''.join(text.split(':')[1].split('\n')[1:])
